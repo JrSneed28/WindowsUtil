@@ -1,0 +1,134 @@
+{
+  "version": "1.0.0",
+  "description": "WinCare configuration — safe defaults. All destructive actions are opt-in.",
+
+  "modules": {
+    "repairHealth": {
+      "enabled": true,
+      "runDISMScanHealth": true,
+      "runDISMRestoreHealth": false,
+      "runSFC": true,
+      "runCheckDisk": false,
+      "checkDiskDrive": "C:",
+      "comment": "Citation: [MS Learn] DISM /ScanHealth, /RestoreHealth — https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-operating-system-package-servicing-command-line-options"
+    },
+    "windowsUpdate": {
+      "enabled": true,
+      "diagnosePending": true,
+      "resetComponents": false,
+      "clearSoftwareDistribution": false,
+      "comment": "Citation: [MS Learn] Reset Windows Update components — https://learn.microsoft.com/en-us/troubleshoot/windows-client/installing-updates-features-roles/reset-windows-update-components"
+    },
+    "securityScan": {
+      "enabled": true,
+      "updateDefinitions": true,
+      "runQuickScan": true,
+      "runFullScan": false,
+      "checkDefenderStatus": true,
+      "comment": "Citation: [MS Learn] Microsoft Defender Antivirus cmdlets — https://learn.microsoft.com/en-us/powershell/module/defender/"
+    },
+    "debloat": {
+      "enabled": false,
+      "mode": "allowlist",
+      "removeProvisionedPackages": false,
+      "disableConsumerFeatures": false,
+      "categories": {
+        "entertainment": false,
+        "social": false,
+        "news": false,
+        "casual_games": false,
+        "trials": false,
+        "oem_bloat": false
+      },
+      "comment": "All debloat actions are opt-in. Mode 'allowlist' only removes packages explicitly listed."
+    },
+    "appUpdates": {
+      "enabled": true,
+      "useWinGet": true,
+      "upgradeAll": false,
+      "approvedPackages": [],
+      "comment": "Citation: [MS Learn] WinGet upgrade — https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade"
+    },
+    "driverGuidance": {
+      "enabled": true,
+      "reportOnly": true,
+      "checkForMissing": true,
+      "checkForOutdated": true,
+      "autoInstall": false,
+      "comment": "Citation: [MS Learn] PnPUtil — https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/pnputil. Never auto-install drivers from unofficial sources."
+    },
+    "gamingOptimize": {
+      "enabled": false,
+      "enableGameMode": true,
+      "setHighPerformancePower": false,
+      "enableHAGS": false,
+      "disableStartupItems": false,
+      "optimizeNetworkSettings": false,
+      "applyRegistryTweaks": false,
+      "comment": "Citation: [MS Learn] Game Mode — https://learn.microsoft.com/en-us/gaming/game-bar/game-mode"
+    }
+  },
+
+  "debloat": {
+    "hardcodedExclusions": [
+      "Microsoft.WindowsStore",
+      "Microsoft.WindowsCalculator",
+      "Microsoft.WindowsTerminal",
+      "Microsoft.DesktopAppInstaller",
+      "Microsoft.SecHealthUI",
+      "Microsoft.WindowsSecurity",
+      "Microsoft.UI.Xaml.*",
+      "Microsoft.VCLibs.*",
+      "Microsoft.NET.*"
+    ],
+    "additionalExclusions": [],
+    "removalTargets": {
+      "entertainment": [
+        "Microsoft.ZuneMusic",
+        "Microsoft.ZuneVideo",
+        "Microsoft.MicrosoftSolitaireCollection"
+      ],
+      "social": [
+        "Microsoft.People",
+        "Microsoft.YourPhone"
+      ],
+      "news": [
+        "Microsoft.BingWeather",
+        "Microsoft.BingNews",
+        "Microsoft.GetHelp",
+        "Microsoft.Getstarted"
+      ],
+      "casual_games": [
+        "Microsoft.MicrosoftSolitaireCollection",
+        "Microsoft.GamingApp"
+      ],
+      "trials": [
+        "Microsoft.MicrosoftOfficeHub"
+      ],
+      "oem_bloat": []
+    },
+    "comment": "hardcodedExclusions are enforced at runtime regardless of configuration changes. These packages are protected infrastructure."
+  },
+
+  "preferences": {
+    "createRestorePoint": true,
+    "backupRegistry": true,
+    "dryRun": false,
+    "verboseLogging": false,
+    "logDirectory": "./Logs",
+    "reportDirectory": "./Reports",
+    "backupDirectory": "./Backups",
+    "maxLogAgeDays": 30,
+    "timeoutMinutes": {
+      "collector": 5,
+      "repairHealth": 30,
+      "windowsUpdate": 15,
+      "securityScan": 60,
+      "debloat": 10,
+      "appUpdates": 20,
+      "driverGuidance": 5,
+      "gamingOptimize": 5
+    },
+    "comment": "Safe defaults: restore points and registry backups enabled, dryRun off but all destructive modules disabled."
+  }
+}
