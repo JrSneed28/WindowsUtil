@@ -1,6 +1,6 @@
 ## About
 
-My twin brother and I have a habit of experimenting with Windows the way some people tinker with cars: poke it, tune it, “optimize” it, and occasionally (often) break something important. When you’re breaking and fixing the same PC multiple times a week, you either stop touching things… or you build a repeatable way to undo your own chaos.
+WinCare was developed because my twin brother and I have a habit of experimenting with Windows the way some people tinker with cars: poke it, tune it, “optimize” it, and occasionally (often) break something important. When you’re breaking and fixing the same PC multiple times a week, you either stop touching things… or you build a repeatable way to undo your own chaos.
 
 So we built WinCare to help us recover from the stuff we kept accidentally (and sometimes intentionally) messing up. It collects a clean snapshot of what’s going on, figures out the most likely culprits, and then runs careful, configurable fixes with reporting and rollback artifacts where it can.
 
